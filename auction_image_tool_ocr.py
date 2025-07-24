@@ -10,17 +10,22 @@ st.image("https://raw.githubusercontent.com/chadjjoiner/auctionimagetoolv2/main/
 st.title("📦 Auction Image Tool OCR")
 
 st.markdown("""
-**How it works:**
-1. Upload a ZIP of **all images** (tag + lot photos).
-2. Upload a ZIP of **tag images only**, in lot number order.
-3. Optionally enter:
+**How it works (OCR-powered):**
+1. Upload a ZIP of **all images**, including:
+   - Lot tag images (with lot numbers written clearly)
+   - Lot item images
+2. Optionally enter:
    - Lot numbers to **skip** (e.g. 113, 116)
    - Extra lots to **insert** (e.g. 105A, 110B)
-4. The app resizes all images and renames them:
-   - `101.jpg` (tag)
-   - `101-1.jpg`, `101-2.jpg` (lot items)
-5. Download a ZIP of processed images.
+   - Last lot number used in previous batch
+3. The app:
+   - Uses OCR to detect lot numbers on tag images
+   - Resizes and renames images:
+     - `101.jpg` (tag, not included in output)
+     - `101-1.jpg`, `101-2.jpg` (lot item photos)
+4. Download a ZIP of organized, resized lot images.
 """)
+
 
 img_zip = st.file_uploader("Upload ZIP with ALL images", type="zip")
 tag_zip = st.file_uploader("Upload ZIP with TAG images only (in order)", type="zip")
