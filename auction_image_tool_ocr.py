@@ -45,8 +45,6 @@ if img_zip:
         with zipfile.ZipFile(img_zip, 'r') as zip_ref:
             zip_ref.extractall(all_dir)
 
-        with zipfile.ZipFile(tag_zip, 'r') as zip_ref:
-            zip_ref.extractall(tags_dir)
 
         def list_images(folder):
             return sorted([
