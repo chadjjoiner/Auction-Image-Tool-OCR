@@ -33,7 +33,7 @@ last_lot_input = st.number_input("📍 Last lot number used in previous batch (l
 skip_lots_input = st.text_input("❌ Enter lot numbers to skip (e.g. 113, 116)")
 extra_lots_input = st.text_input("➕ Enter extra lots to insert (e.g. 105A, 110B)")
 
-if img_zip and tag_zip:
+if img_zip:
     with tempfile.TemporaryDirectory() as temp_dir:
         all_dir = os.path.join(temp_dir, "all")
         tags_dir = os.path.join(temp_dir, "tags")
