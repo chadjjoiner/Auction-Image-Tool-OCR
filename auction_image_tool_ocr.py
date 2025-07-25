@@ -28,7 +28,7 @@ st.markdown("""
 
 
 img_zip = st.file_uploader("Upload ZIP with ALL images", type="zip")
-tag_zip = st.file_uploader("Upload ZIP with TAG images only (in order)", type="zip")
+
 last_lot_input = st.number_input("📍 Last lot number used in previous batch (leave 0 to start at 1)", min_value=0, value=0)
 skip_lots_input = st.text_input("❌ Enter lot numbers to skip (e.g. 113, 116)")
 extra_lots_input = st.text_input("➕ Enter extra lots to insert (e.g. 105A, 110B)")
