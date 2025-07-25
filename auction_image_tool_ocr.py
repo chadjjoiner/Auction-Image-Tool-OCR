@@ -42,13 +42,16 @@ if img_zip:
     extra_lots = [e.strip().upper() for e in extra_lots_input.split(",") if e.strip()]
     extra_lots_iter = iter(extra_lots)
 
+    debug_output = []
+
     # OCR & group
     for fname in image_files:
         fpath = os.path.join(extract_dir, fname)
         try:
             img = Image.open(fpath)
             text = pytesseract.image_to_string(img)
-            match = re.search(r"(?:lot\s*)?(\d{3}[A-Z]?)", text, re.IGNORECASE)
+            debug_output.append(f"**{fname}**: {text.strip()}")
+            match = re.search(r"(\d{3}[A-Z]?)", text.strip(), re.IGNORECASE)
             if match:
                 lot_id = match.group(1).upper()
                 if lot_id not in skip_lots:
@@ -68,10 +71,17 @@ if img_zip:
             lot_map[xlot] = []
 
     if not lot_map:
-        st.error("❌ No valid lot numbers detected. Please ensure your tag images are legible and follow the format (e.g. 'Lot 101').")
+        st.error("❌ No valid lot numbers detected. Please ensure your tag images have clear numbers (e.g. 101, 105A).")
+        with st.expander("🔍 OCR Debug Output"):
+            for line in debug_output:
+                st.markdown(line)
     else:
         st.markdown("### ✅ Detected Lots")
         st.write(sorted(lot_map.keys()))
+
+        with st.expander("🔍 OCR Debug Output"):
+            for line in debug_output:
+                st.markdown(line)
 
         output_dir = "renamed_images"
         if os.path.exists(output_dir):
